@@ -1,1 +1,535 @@
-SEE_NEXT
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Assistente de IA — ebook de Marcos Cruz</title>
+<meta name="description" content="Guia prático para quem não é de tecnologia: como usar IA no trabalho, no dinheiro e na vida, com 30 pedidos prontos para copiar e usar. Por Marcos Cruz.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  html{ color-scheme: light; }
+  *{box-sizing:border-box;}
+  :root{
+    --bg:#F1F2F6;
+    --surface:#FFFFFF;
+    --ink:#141B30;
+    --ink-soft:#4B5470;
+    --accent:#E15A2E;
+    --accent-strong:#C94A22;
+    --on-accent:#FFF8F2;
+    --line:#DEE1EA;
+    --navy:#0F1730;
+    --navy-soft:#AAB1CC;
+    --navy-line:#293258;
+    --callout-bg:#FCE7DA;
+    --callout-border:#E15A2E;
+    --reply-bg:#E8EBF4;
+    --reply-border:#B9C0DC;
+    --chip-bg:#E9ECF4;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#0B1020;
+      --surface:#131A2E;
+      --ink:#EEF0F6;
+      --ink-soft:#AEB4CC;
+      --accent:#F1793F;
+      --accent-strong:#FF9159;
+      --on-accent:#1A0D06;
+      --line:#232C48;
+      --navy:#070B16;
+      --navy-soft:#8A92B4;
+      --navy-line:#212A48;
+      --callout-bg:#2A1D16;
+      --callout-border:#F1793F;
+      --reply-bg:#182038;
+      --reply-border:#2D375A;
+      --chip-bg:#1B2338;
+    }
+    html{ color-scheme: dark; }
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Public Sans', system-ui, sans-serif;
+    padding-inline:20px;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', Georgia, serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+    margin:0;
+  }
+  p{ margin:0; line-height:1.6; }
+  img{ max-width:100%; }
+  .wrap{ max-width:760px; margin-inline:auto; }
+  .wrap-wide{ max-width:920px; margin-inline:auto; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky; top:0;
+    z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px;
+    padding-block:14px;
+    background:rgba(241,242,246,0.88);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+    margin-inline:-20px; padding-inline:20px;
+  }
+  @media (prefers-color-scheme: dark){ .nav{ background:rgba(11,16,32,0.88); } }
+  .brand{
+    font-family:'Fraunces', serif; font-weight:700; font-size:16px;
+    display:flex; align-items:center; gap:8px; white-space:nowrap;
+  }
+  .brand .dot{ width:8px; height:8px; border-radius:50%; background:var(--accent); flex:none; }
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:'Public Sans', sans-serif; font-weight:700; font-size:14px;
+    padding:11px 18px; border-radius:8px; border:1px solid transparent;
+    text-decoration:none; cursor:pointer; white-space:nowrap;
+    transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn:active{ transform:translateY(1px); }
+  .btn-primary{ background:var(--accent); color:var(--on-accent); box-shadow:0 6px 16px -6px rgba(225,90,46,0.5); }
+  .btn-primary:hover{ background:var(--accent-strong); }
+  .btn-onnavy{ background:var(--accent); color:var(--on-accent); }
+  .btn-sm{ padding:8px 14px; font-size:13px; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    background:var(--navy);
+    color:#fff;
+    margin-inline:-20px; padding-inline:20px;
+    border-radius:0 0 28px 28px;
+    padding-top:56px; padding-bottom:44px;
+    position:relative; overflow:hidden;
+  }
+  .hero::before{
+    content:""; position:absolute; inset:auto -40% -60% auto; width:520px; height:520px;
+    background:radial-gradient(circle, rgba(225,90,46,0.55), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--accent-strong);
+    display:flex; align-items:center; gap:10px; margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:1px; background:var(--accent-strong); }
+  .hero h1{
+    font-size:clamp(38px,9vw,64px); line-height:.98; color:#fff;
+  }
+  .hero h1 em{ font-style:normal; color:var(--accent-strong); }
+  .hero-sub{
+    margin-top:18px; font-size:17px; color:var(--navy-soft); max-width:46ch; line-height:1.55;
+  }
+  .stat-bar{
+    margin-top:26px; padding:16px 18px; border-radius:12px;
+    background:#2a1a10;
+    border:1px solid #7a3a1c;
+    font-size:14.5px; line-height:1.55; color:#fdece2;
+  }
+  .stat-bar b{ color:#fff; }
+  .hero-cta{
+    margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:16px;
+  }
+  .price-tag{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy-soft); }
+  .price-tag b{ color:#fff; font-size:15px; }
+  .byline{
+    margin-top:34px; padding-top:18px; border-top:1px solid var(--navy-line);
+    display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--navy-soft);
+  }
+  .byline b{ color:#fff; }
+
+  /* ---------- generic section ---------- */
+  section{ padding-block:56px; }
+  .section-head{ margin-bottom:28px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600;
+    letter-spacing:.14em; text-transform:uppercase; color:var(--accent-strong);
+    margin-bottom:10px; display:block;
+  }
+  .section-head h2{ font-size:clamp(26px,4.6vw,36px); }
+  .lede{ margin-top:12px; font-size:16px; color:var(--ink-soft); max-width:60ch; }
+
+  /* ---------- pain list ---------- */
+  .pain-grid{ display:grid; gap:12px; }
+  .pain-item{
+    display:flex; gap:14px; align-items:flex-start;
+    padding:16px 18px; background:var(--surface); border:1px solid var(--line); border-radius:12px;
+  }
+  .pain-item .mark{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:12px;
+    color:var(--accent-strong); flex:none; padding-top:2px;
+  }
+  .pain-item p{ font-size:15px; color:var(--ink); }
+  .pain-note{ margin-top:22px; font-size:15.5px; color:var(--ink-soft); max-width:64ch; }
+
+  /* ---------- antes/depois (proof) ---------- */
+  .proof{ display:grid; gap:16px; }
+  @media (min-width:680px){ .proof{ grid-template-columns:1fr 1fr; } }
+  .proof-card{ border-radius:14px; padding:18px; border:1px solid var(--line); background:var(--surface); }
+  .proof-label{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; font-weight:600;
+    letter-spacing:.08em; text-transform:uppercase; margin-bottom:12px; display:block;
+  }
+  .proof-before{ opacity:.82; }
+  .proof-before .proof-label{ color:var(--ink-soft); }
+  .proof-after{ border-color:var(--callout-border); background:var(--callout-bg); }
+  .proof-after .proof-label{ color:var(--accent-strong); }
+  .proof-card .prompt{
+    font-family:'IBM Plex Mono', monospace; font-size:13.5px; line-height:1.6; color:var(--ink);
+  }
+  .proof-result{ margin-top:14px; padding-top:14px; border-top:1px dashed var(--line); font-size:13.5px; color:var(--ink-soft); font-style:italic; }
+  .proof-caption{ margin-top:14px; font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- table of contents ---------- */
+  .toc{ display:grid; gap:22px; }
+  @media (min-width:680px){ .toc{ grid-template-columns:1fr 1fr; } }
+  .toc-part{ border-left:2px solid var(--line); padding-left:16px; }
+  .toc-part .toc-num{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--accent-strong); font-weight:600; letter-spacing:.1em; }
+  .toc-part h3{ font-size:19px; margin-top:6px; margin-bottom:10px; }
+  .toc-part ul{ list-style:none; margin:0; padding:0; display:grid; gap:7px; }
+  .toc-part li{ font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- tools sample ---------- */
+  .tool-table{ width:100%; border-collapse:collapse; font-size:14px; }
+  .tool-table th{
+    text-align:left; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--ink-soft); padding:10px 12px; border-bottom:1px solid var(--line);
+  }
+  .tool-table td{ padding:12px; border-bottom:1px solid var(--line); vertical-align:top; color:var(--ink); }
+  .tool-table td:first-child{ font-family:'IBM Plex Mono', monospace; color:var(--accent-strong); font-weight:600; width:28px; }
+  .table-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+  .table-wrap table{ min-width:520px; }
+  .tools-extra{ margin-top:18px; display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; padding:7px 12px; border-radius:999px;
+    background:var(--chip-bg); color:var(--ink-soft);
+  }
+
+  /* ---------- na pratica quotes ---------- */
+  .quotes{ display:grid; gap:16px; }
+  @media (min-width:680px){ .quotes{ grid-template-columns:repeat(3,1fr); } }
+  .quote-card{
+    background:var(--reply-bg); border:1px solid var(--reply-border); border-radius:14px; padding:18px;
+  }
+  .quote-card .quote-tag{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); letter-spacing:.08em; text-transform:uppercase; }
+  .quote-card p{ margin-top:10px; font-size:14.5px; color:var(--ink); }
+
+  /* ---------- author ---------- */
+  .author{ display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap; }
+  .author-badge{
+    flex:none; width:64px; height:64px; border-radius:50%; background:var(--navy);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces', serif; font-weight:700; font-size:22px; color:var(--accent-strong);
+    border:2px solid var(--accent);
+  }
+  .author-body{ flex:1; min-width:240px; }
+  .author-body h3{ font-size:20px; margin-bottom:8px; }
+  .author-body p + p{ margin-top:10px; }
+  .author-body p{ font-size:15px; color:var(--ink-soft); }
+
+  /* ---------- disclaimer ---------- */
+  .disclaimer{
+    background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:22px;
+  }
+  .disclaimer ul{ margin:14px 0 0; padding-left:18px; display:grid; gap:8px; }
+  .disclaimer li{ font-size:14px; color:var(--ink-soft); }
+  .disclaimer li b{ color:var(--ink); }
+
+  /* ---------- pricing ---------- */
+  .price-card{
+    background:var(--navy); color:#fff; border-radius:20px; padding:34px 28px;
+    display:grid; gap:22px; position:relative; overflow:hidden;
+  }
+  .price-card::after{
+    content:""; position:absolute; inset:-40% -20% auto auto; width:340px; height:340px;
+    background:radial-gradient(circle, rgba(225,90,46,0.45), transparent 70%);
+  }
+  .price-card-inner{ position:relative; display:grid; gap:22px; }
+  .price-row{ display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  .price-value{ font-family:'Fraunces', serif; font-weight:700; font-size:44px; }
+  .price-old{ font-family:'IBM Plex Mono', monospace; font-size:14px; color:var(--navy-soft); text-decoration:line-through; }
+  .price-includes{ list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+  .price-includes li{ display:flex; gap:10px; font-size:14.5px; color:#f2f2f5; }
+  .price-includes li::before{ content:"✓"; color:var(--accent-strong); font-weight:700; flex:none; }
+  .price-note{ font-size:12.5px; color:var(--navy-soft); }
+
+  /* ---------- faq ---------- */
+  .faq{ display:grid; gap:10px; }
+  details{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:4px 18px; }
+  summary{ cursor:pointer; padding-block:14px; font-weight:600; font-size:15px; list-style:none; display:flex; justify-content:space-between; gap:12px; align-items:center; }
+  summary::-webkit-details-marker{ display:none; }
+  summary::after{ content:"+"; font-family:'IBM Plex Mono', monospace; color:var(--accent-strong); font-size:18px; flex:none; }
+  details[open] summary::after{ content:"−"; }
+  details p{ padding-bottom:16px; font-size:14.5px; color:var(--ink-soft); }
+
+  /* ---------- footer ---------- */
+  footer{
+    padding-block:40px; border-top:1px solid var(--line); margin-top:8px;
+  }
+  footer p{ font-size:12.5px; color:var(--ink-soft); line-height:1.7; }
+  footer .foot-top{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+
+  .final-cta{ text-align:center; margin-top:40px; }
+  .final-cta p{ margin-top:14px; font-size:14px; color:var(--ink-soft); }
+
+  @media (max-width:480px){
+    .hero{ padding-top:44px; }
+    section{ padding-block:44px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="brand"><span class="dot"></span>Meu Assistente de IA</div>
+  <a class="btn btn-primary btn-sm" href="https://link.infinitepay.io/marcosvncruz/VC1DLUMtUg-hZScCbprkw-19,90" target="_blank" rel="noopener">Comprar — R$ 19,90</a>
+</header>
+
+<section class="hero">
+  <div class="hero-inner wrap">
+    <span class="eyebrow">Guia prático para quem não é de tecnologia</span>
+    <h1>Meu Assistente<br><em>de IA</em></h1>
+    <p class="hero-sub">Como eu resolvo problemas reais do trabalho, do dinheiro e da vida com o Claude, sem ser de tecnologia — por Marcos Cruz.</p>
+    <div class="stat-bar">
+      <b>7 dias</b> para ganhar pelo menos <b>1 hora por dia</b> com inteligência artificial.<br>
+      <b>30 pedidos prontos</b> para copiar e usar hoje mesmo.
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-onnavy" href="https://link.infinitepay.io/marcosvncruz/VC1DLUMtUg-hZScCbprkw-19,90" target="_blank" rel="noopener">Quero o meu exemplar</a>
+      <span class="price-tag">PDF · <b>R$ 19,90</b> · leitura imediata</span>
+    </div>
+    <div class="byline">
+      Escrito por <b>Marcos Cruz</b> — não é de tecnologia, e é exatamente por isso que este livro funciona para você.
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="kicker">O problema</span>
+    <h2>Você tenta usar IA e desiste na primeira tentativa</h2>
+    <p class="lede">Não é falta de capacidade. É que ninguém te mostrou como se conversa com uma IA sobre os seus problemas de verdade.</p>
+  </div>
+  <div class="pain-grid">
+    <div class="pain-item"><span class="mark">01</span><p>O e-mail difícil fica três dias parado na caixa de entrada porque você não sabe o tom certo.</p></div>
+    <div class="pain-item"><span class="mark">02</span><p>O relatório da semana começa do zero todo mundo — e come a sua sexta-feira inteira.</p></div>
+    <div class="pain-item"><span class="mark">03</span><p>Uma decisão importante fica rodando na cabeça por dias, sem ninguém para ajudar a organizar os prós e os contras.</p></div>
+    <div class="pain-item"><span class="mark">04</span><p>Você já tentou aprender IA em vídeos longos, termos em inglês e listas de "100 prompts secretos" — e nada ficou.</p></div>
+  </div>
+  <p class="pain-note">Este livro não é um curso de tecnologia. É o caderno de uso real de alguém que também achava que IA era coisa de programador — e mudou de ideia quando parou de tentar <em>entender</em> a IA e passou a <em>conversar</em> com ela sobre a própria rotina.</p>
+</section>
+
+<section class="wrap-wide">
+  <div class="section-head wrap" style="margin-inline:auto;">
+    <span class="kicker">A diferença, na prática</span>
+    <h2>Comando genérico vs. pedido de verdade</h2>
+    <p class="lede">O exemplo abaixo está no livro, sem alterações. Repare que a diferença não é a IA — é como você pede.</p>
+  </div>
+  <div class="proof">
+    <div class="proof-card proof-before">
+      <span class="proof-label">Antes — comando</span>
+      <p class="prompt">"Escreva um e-mail cobrando um cliente."</p>
+      <p class="proof-result">Resultado: um e-mail frio e formal, do tipo que qualquer pessoa percebe que foi feito por robô.</p>
+    </div>
+    <div class="proof-card proof-after">
+      <span class="proof-label">Depois — pedido com os 4 Cs</span>
+      <p class="prompt">"Preciso cobrar um cliente antigo que está 15 dias atrasado com um pagamento de R$ 3.200. Ele sempre pagou em dia e gosto dele, não quero estragar a relação. Escreva um e-mail curto, educado mas firme, e sugira uma nova data de pagamento."</p>
+      <p class="proof-result">Resultado: um e-mail que parece escrito por você, no tom certo — resolvido em minutos.</p>
+    </div>
+  </div>
+  <p class="proof-caption">O livro chama isso de <b>fórmula dos 4 Cs</b> — contexto, conteúdo, cuidado e contorno. É o método por trás de todos os 30 pedidos prontos que você recebe.</p>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="kicker">O que tem dentro</span>
+    <h2>57 páginas, direto ao ponto, em 4 partes</h2>
+  </div>
+  <div class="toc">
+    <div class="toc-part">
+      <span class="toc-num">Parte 1</span>
+      <h3>O jeito certo de usar</h3>
+      <ul>
+        <li>Por que parei de tentar aprender IA e comecei a usar</li>
+        <li>A regra de ouro: conversar, e não comandar</li>
+        <li>Seus primeiros 15 minutos</li>
+      </ul>
+    </div>
+    <div class="toc-part">
+      <span class="toc-num">Parte 2</span>
+      <h3>Na prática</h3>
+      <ul>
+        <li>Trabalho, dinheiro, casa e família</li>
+        <li>Saúde e rotina, estudos e aprendizado</li>
+        <li>Renda extra e pequeno negócio</li>
+        <li>Decisões com a IA como conselheira</li>
+      </ul>
+    </div>
+    <div class="toc-part">
+      <span class="toc-num">Parte 3</span>
+      <h3>Usar com segurança</h3>
+      <ul>
+        <li>Onde a IA erra e como eu confiro</li>
+        <li>Os 7 erros de quem está começando</li>
+      </ul>
+    </div>
+    <div class="toc-part">
+      <span class="toc-num">Parte 4</span>
+      <h3>Ferramentas</h3>
+      <ul>
+        <li>30 pedidos prontos para copiar</li>
+        <li>Checklist do bom pedido</li>
+        <li>O desafio de 7 dias</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="kicker">O bônus que mais é usado</span>
+    <h2>30 pedidos prontos — só trocar o que está entre colchetes</h2>
+    <p class="lede">Uma amostra da tabela que vem no final do livro:</p>
+  </div>
+  <div class="table-wrap">
+    <table class="tool-table">
+      <thead><tr><th>#</th><th>Situação</th><th>Pedido</th></tr></thead>
+      <tbody>
+        <tr><td>02</td><td>E-mail difícil</td><td>Responda este e-mail [cole] querendo [objetivo], sem parecer [tom a evitar]. Duas versões.</td></tr>
+        <tr><td>09</td><td>Orçamento</td><td>Renda R$ [x], gastos [liste]. Tabela, para onde vai o dinheiro e 3 cortes realistas.</td></tr>
+        <tr><td>16</td><td>Viagem</td><td>[Destino], [dias], [quem], R$ [x]. Roteiro dia a dia com plano B para chuva.</td></tr>
+        <tr><td>28</td><td>Advogado do diabo</td><td>Estou pensando em [decisão]. Mostre o que eu posso não estar vendo.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tools-extra">
+    <span class="chip">+ Checklist do bom pedido</span>
+    <span class="chip">+ Desafio de 7 dias com planilha de antes/depois</span>
+    <span class="chip">+ Glossário sem jargão</span>
+  </div>
+</section>
+
+<section class="wrap-wide">
+  <div class="section-head wrap" style="margin-inline:auto;">
+    <span class="kicker">Direto do livro</span>
+    <h2>Como isso funciona na vida real</h2>
+  </div>
+  <div class="quotes">
+    <div class="quote-card">
+      <span class="quote-tag">Trabalho</span>
+      <p>"Montar o resumo da semana me custava quase uma hora na sexta-feira. Hoje eu colo minhas anotações soltas, reviso o texto e envio em 15 minutos."</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-tag">Dinheiro</span>
+      <p>"Quando organizei meus gastos com a IA pela primeira vez, levei um susto: as assinaturas que eu nem usava somavam mais do que eu imaginava."</p>
+    </div>
+    <div class="quote-card">
+      <span class="quote-tag">Decisões</span>
+      <p>"A IA pesquisou as taxas atuais, e eu preferi outra opção por ser mais simples. Ela não insistiu. Mostrou os números e deixou a escolha comigo."</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="kicker">Quem escreveu</span>
+    <h2>Sobre o autor</h2>
+  </div>
+  <div class="author">
+    <div class="author-badge">MC</div>
+    <div class="author-body">
+      <h3>Marcos Cruz</h3>
+      <p>Marcos Cruz não é da área de tecnologia. Como muita gente, passou anos com a agenda cheia, a caixa de entrada lotada e a sensação de que a inteligência artificial era coisa para programadores.</p>
+      <p>Tudo mudou quando parou de tentar entender a IA e passou a usá-la nos problemas reais do dia a dia: no trabalho, nas contas de casa, na rotina da família e nas grandes decisões. Este livro reúne o que funcionou, do jeito que ele usa — e é a prova do próprio método: nasceu de uma conversa em que, em vez de uma resposta pronta, ele recebeu perguntas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="disclaimer">
+    <span class="kicker" style="margin-bottom:0;">Antes de comprar</span>
+    <h3 style="font-size:18px; margin-top:8px;">O que este livro é — e o que não é</h3>
+    <ul>
+      <li><b>É</b> um guia prático e informativo sobre como conversar com um assistente de IA no dia a dia.</li>
+      <li><b>Não substitui</b> médicos, advogados, contadores ou consultores financeiros. Decisões sobre saúde, dinheiro e contratos devem sempre ser confirmadas com um profissional qualificado.</li>
+      <li>As respostas de uma IA variam a cada conversa — os exemplos mostram o tipo de resultado esperado, não um texto idêntico ao que você vai receber.</li>
+      <li><b>Claude é uma marca da Anthropic.</b> Este é um livro independente, escrito por um usuário, sem afiliação, patrocínio ou aprovação da Anthropic. As técnicas também funcionam em outros assistentes de IA.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="comprar" class="wrap">
+  <div class="price-card">
+    <div class="price-card-inner">
+      <div>
+        <span class="kicker" style="color:var(--accent-strong);">Oferta de lançamento</span>
+        <div class="price-row">
+          <span class="price-value">R$ 19,90</span>
+          <span class="price-old">de R$ 37,00</span>
+        </div>
+        <p style="color:var(--navy-soft); font-size:14.5px; margin-top:6px;">Pagamento único. PDF de 57 páginas, acesso imediato após a confirmação.</p>
+      </div>
+      <ul class="price-includes">
+        <li>Ebook completo — 14 capítulos, 4 partes</li>
+        <li>30 pedidos prontos para copiar e usar</li>
+        <li>Checklist do bom pedido</li>
+        <li>Desafio de 7 dias com planilha de antes/depois</li>
+        <li>Glossário sem jargão</li>
+      </ul>
+      <a class="btn btn-onnavy" href="https://link.infinitepay.io/marcosvncruz/VC1DLUMtUg-hZScCbprkw-19,90" target="_blank" rel="noopener" style="justify-self:start;">Quero garantir o meu exemplar</a>
+      <p class="price-note">Você será direcionado para o checkout seguro da InfinityPay. Preço promocional de lançamento, sujeito a alteração. Compra única — este livro não tem versão física.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="kicker">Dúvidas</span>
+    <h2>Perguntas frequentes</h2>
+  </div>
+  <div class="faq">
+    <details>
+      <summary>Preciso entender de tecnologia para acompanhar?</summary>
+      <p>Não. O livro foi escrito exatamente para quem não é de tecnologia — sem termos em inglês, sem explicação de como a IA funciona por dentro. Só situações reais e pedidos prontos para copiar.</p>
+    </details>
+    <details>
+      <summary>Funciona só no Claude ou em qualquer IA?</summary>
+      <p>Os exemplos usam o Claude, mas o método — a fórmula dos 4 Cs e o jeito de conversar em vez de comandar — funciona também em outros assistentes de inteligência artificial.</p>
+    </details>
+    <details>
+      <summary>Como eu recebo o ebook depois de comprar?</summary>
+      <p>Após o pagamento na InfinityPay, você recebe o arquivo em PDF por e-mail ou WhatsApp, para ler no computador, tablet ou celular. O envio é feito logo em seguida à confirmação do pagamento.</p>
+    </details>
+    <details>
+      <summary>O livro substitui um advogado, médico ou contador?</summary>
+      <p>Não, e o livro é explícito sobre isso. Ele ensina a usar a IA para organizar e entender melhor essas situações — a decisão final e a confirmação técnica continuam sendo com um profissional qualificado.</p>
+    </details>
+  </div>
+</section>
+
+<section class="wrap final-cta">
+  <h2 style="font-size:clamp(24px,4vw,32px);">Comece a conversa que pode te devolver uma hora por dia.</h2>
+  <p><a class="btn btn-primary" href="https://link.infinitepay.io/marcosvncruz/VC1DLUMtUg-hZScCbprkw-19,90" target="_blank" rel="noopener" style="margin-top:18px;">Quero o meu exemplar — R$ 19,90</a></p>
+</section>
+
+<footer class="wrap">
+  <div class="foot-top">
+    <div class="brand"><span class="dot"></span>Meu Assistente de IA</div>
+    <span style="font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);">Marcos Cruz · 1ª edição, 2026</span>
+  </div>
+  <p>© 2026 Marcos Cruz. Todos os direitos reservados. Nenhuma parte deste livro pode ser reproduzida, distribuída ou revendida sem autorização por escrito do autor.<br>
+  Este material tem caráter informativo e educativo e não substitui a orientação de médicos, advogados, contadores, consultores financeiros ou outros profissionais.<br>
+  Claude é uma marca da Anthropic. Este livro é uma obra independente, escrita por um usuário, e não tem afiliação, patrocínio ou aprovação da Anthropic.</p>
+</footer>
+
+</body>
+</html>
